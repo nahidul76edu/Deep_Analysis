@@ -1,0 +1,6 @@
+import pandas as pd
+Model_History_best = pd.DataFrame(history.history)
+
+hist_csv_file = '/content/drive/MyDrive/Fatigue_Dataset/cnn_lstm_history.csv'
+with open(hist_csv_file, mode='w') as f:
+    Model_History_best.to_csv(f)
