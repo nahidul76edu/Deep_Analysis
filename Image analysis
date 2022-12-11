@@ -1,0 +1,35 @@
+import pandas as pd
+import numpy as np
+import cv2
+import os
+from PIL import Image
+import glob
+
+cv_img = []
+a = []
+b = []
+c = []
+d = []
+
+count = 0
+
+data_track = pd.read_csv('/content/drive/MyDrive/plant-pathology-2020-fgvc7/train.csv')
+for img in glob.glob("/content/drive/MyDrive/plant-pathology-2020-fgvc7/images/Train/*.jpg")[0:800]:
+  
+  im = Image.open(img)
+  img_res = im.resize((224, 224), Image.ANTIALIAS)
+  np_img = np.array(img_res)
+
+  count= count+1
+
+  if data_track['healthy'][count] == 1: 
+    a.append(np_img)
+
+  elif data_track['multiple_diseases'][count] == 1:
+    b.append(np_img)
+
+  elif data_track['rust'][count] == 1: 
+    c.append(np_img)
+
+  elif data_track['scab'][count] == 1: 
+    d.append(np_img)
